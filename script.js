@@ -28,6 +28,73 @@ function erroAutenticacao(erro){
     inicio()
 }
 
+setInterval(manterConexão, 5000)
+setInterval(recebeMensagens, 3000)
+
+function manterConexão(){
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/status', usuário)
+}
+
 function recebeMensagens(){
+    const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
+    promise.then(respostaMensagens)
+
+}
+
+function respostaMensagens(resposta){
+    messages = resposta.data
+    console.log(messages)
+    renderizarMensagens()
     
+}
+
+function renderizarMensagens(){
+
+    const chat = document.querySelector('.messages')
+    chat.innerHTML = ''
+    for(let i = 0; i < messages.length; i++){
+      
+        if(messages[i].type === 'status'){
+            chat.innerHTML += 
+            `<div class = "mensagem status">
+                <span class = "time">(${messages[i].time})&nbsp;</span>
+                <b>${messages[i].from}&nbsp;</b>
+                <span class="text">${messages[i].text}&nbsp;</span>
+            </div>`
+      
+        } else if (messages[i].type === 'message'){
+            chat.innerHTML +=
+             `<div class = "mensagem message">
+                <div class = "time">(${messages[i].time})&nbsp</div>
+                <b> ${messages[i].from}&nbsp;</b>
+                <div>para&nbsp<b>${messages[i].to}</b>:&nbsp</div>
+                <div class="text">${messages[i].text}&nbsp</div>
+              </div>`
+            
+        } else if (messages[i].type === 'private_message'){
+                if(messages[i].to === usuário.name || messages[i].from === usuário.name){
+                    chat.innerHTML +=
+                    `<div class = "mensagem private_message">
+                       <div class = "time">(${messages[i].time})&nbsp</div>
+                       <b> ${messages[i].from}&nbsp;</b>
+                       <div>reservadamente para&nbsp<b>${messages[i].to}</b>:&nbsp</div>
+                       <div class="text">${messages[i].text}&nbsp</div>
+                     </div>` 
+                }
+        }
+      
+        
+    }
+    Scroll();
+}
+
+function Scroll(){
+    const mensagens = document.querySelector(".messages")
+    const novaMensagem = mensagens.lastElementChild;
+    const html = novaMensagem.innerHTML
+    if(ultimaMensagem !== html){
+        ultimaMensagem = html;
+        novaMensagem.scrollIntoView();
+    }
+
 }
