@@ -1,10 +1,53 @@
 let messages = [];
 let ultimaMensagem;
 let usuário = {}
-let nomeValido = false
-inicio()
+//inicio()
 
-function inicio(){
+function fazerLogin(){
+    const nome = document.querySelector('.user').value
+    if(nome !== ''){
+        usuário = {name: nome}
+       const entrar = document.querySelector('.entrar')
+        entrar.innerHTML = 
+        `<img class ="gif" src ="./images/loading2.gif"/>
+        <div>Entrando</div>`
+    
+        const aa =  axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', usuário)
+       aa.then(entrarnaSala)
+        aa.catch(erroAutenticacao)
+    } else{
+        alert('Por favor, digite um nome!') 
+    }
+
+}
+
+function erroAutenticacao(erro){
+    console.log("Status code: " + erro.response.status);
+	alert('Esse nome já está em uso! Digite outro nome.')
+    window.location.reload()
+    
+} 
+
+function entrarnaSala(){
+    recebeMensagens()
+    manterConexão
+    usuarioLogado()
+    const telaLogin = document.querySelector('.tela_login')
+    console.log(telaLogin)
+    telaLogin.classList.add('hidden')
+    const conteudo = document.querySelector('.all')
+    conteudo.classList.remove('hidden')
+    
+    
+}
+
+function usuarioLogado(){
+    setInterval(manterConexão, 5000)
+    setInterval(recebeMensagens, 1000)
+}
+//window.location.reload()
+
+/*function inicio(){
     
     while(nomeValido === false){
         const nome = prompt("Digite o nome de usuário");
@@ -20,16 +63,16 @@ function inicio(){
         }
     }
 
-}
+} */
 
-function erroAutenticacao(erro){
+/*function erroAutenticacao(erro){
     console.log("Status code: " + erro.response.status);
 	alert('Esse nome já está em uso! Digite outro nome.')
-    inicio()
-}
+    
+} */
 
-setInterval(manterConexão, 5000)
-setInterval(recebeMensagens, 3000)
+//setInterval(manterConexão, 5000)
+//setInterval(recebeMensagens, 3000)
 
 function manterConexão(){
     axios.post('https://mock-api.driven.com.br/api/v6/uol/status', usuário)
@@ -43,7 +86,6 @@ function recebeMensagens(){
 
 function respostaMensagens(resposta){
     messages = resposta.data
-    console.log(messages)
     renderizarMensagens()
     
 }
@@ -109,10 +151,11 @@ function enviarMensagem(){
 	    type: "message" 
     }
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', message)
-    const input = document.querySelector('input')
+    const input = document.querySelector('.message-box')
     input.value = ''
     promise.then(mensagemEnviada)
     promise.catch(mensagemErro)
+    renderizarMensagens()
 }
 
 function mensagemEnviada(){
@@ -122,5 +165,5 @@ function mensagemEnviada(){
 
 function mensagemErro(erro){
     console.log("Status code: " + erro.response.status)
-    alert('Sua mensagem não foi enviada! Tente novamente')
+    window.location.reload()
 }
