@@ -98,3 +98,29 @@ function Scroll(){
     }
 
 }
+
+function enviarMensagem(){
+    const mensagem = document.querySelector('.message-box').value
+    console.log(mensagem)
+    const message = {
+        from: usuário.name,
+	    to: "Todos",
+	    text: mensagem,
+	    type: "message" 
+    }
+    const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', message)
+    const input = document.querySelector('input')
+    input.value = ''
+    promise.then(mensagemEnviada)
+    promise.catch(mensagemErro)
+}
+
+function mensagemEnviada(){
+    console.log('mensagem enviada')
+    recebeMensagens()
+}
+
+function mensagemErro(erro){
+    console.log("Status code: " + erro.response.status)
+    alert('Sua mensagem não foi enviada! Tente novamente')
+}
