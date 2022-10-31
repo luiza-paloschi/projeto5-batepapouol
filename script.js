@@ -23,7 +23,6 @@ function fazerLogin(){
 
 function erroAutenticacao(erro){
     console.log("Status code: " + erro.response.status);
-    console.log(nome)
 	alert('Esse nome já está em uso! Digite outro nome.');
     window.location.reload(); 
 }
