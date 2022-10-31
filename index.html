@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bate-papo UOL</title>
+    <link rel="icon" type="image/x-icon" href="./images/logohead2.png">
     <link href="./css/reset.css" rel="stylesheet" />
     <link href="./css/style.css" rel="stylesheet" />
 </head>
@@ -12,8 +13,8 @@
     <div class="tela_login">
         <img alt="logouol_login" src="./images/logo 1.png" />
         <div class ='entrar'>
-            <input class="user" type = "text" placeholder="Digite seu nome"/>
-            <button class="botao_entrar" onClick="fazerLogin()">Entrar</button>
+            <input data-identifier="enter-name" class="user" type = "text" placeholder="Digite seu nome"/>
+            <button data-identifier="start" class="botao_entrar" onClick="fazerLogin()">Entrar</button>
         </div>
     </div>
         <div class="side_menu_background" onclick="hideMenu()"></div>
@@ -28,11 +29,11 @@
             </div>
             <div class="titulo titulo2">Escolha a visibilidade:</div>
             <div class ='options_visibility'>
-                <div id ="public" class="participante" onclick="selVisibilidade(this)">
+                <div  data-identifier="visibility" id ="public" class="participante" onclick="selVisibilidade(this)">
                     <ion-icon name="lock-open"></ion-icon>
                     <p>Público</p>
                 </div>
-                <div id ="private_message" class="participante" onclick="selVisibilidade(this)">
+                <div  data-identifier="visibility" id ="private_message" class="participante" onclick="selVisibilidade(this)">
                     <ion-icon name="lock-open"></ion-icon>
                     <p>Reservadamente</p>
                 </div>
@@ -51,7 +52,7 @@
                 <div id="legenda"></div>
             </div> 
             
-            <ion-icon id ="send" name="paper-plane-outline" onClick = "enviarMensagem()"></ion-icon>
+            <ion-icon id ="send" name="paper-plane-outline" onclick = "enviarMensagem()"></ion-icon>
         </div>    
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
