@@ -70,14 +70,14 @@ function renderizarMensagens(){
     for(let i = 0; i < messages.length; i++){
         if(messages[i].type === 'status'){
             chat.innerHTML +=
-            `<div class = "mensagem status">
+            `<div data-test="message" class = "mensagem status">
                 <span class = "time">(${messages[i].time})&nbsp;</span>
                 <b>${messages[i].from}&nbsp;</b>
                 <span class="text">${messages[i].text}&nbsp;</span>
             </div>`;
         } else if (messages[i].type === 'message'){
             chat.innerHTML +=
-             `<div class = "mensagem message">
+             `<div data-test="message" class = "mensagem message">
                 <div class = "time">(${messages[i].time})&nbsp</div>
                 <b> ${messages[i].from}&nbsp;</b>
                 <div>para&nbsp<b>${messages[i].to}</b>:&nbsp</div>
@@ -86,7 +86,7 @@ function renderizarMensagens(){
         } else if (messages[i].type === 'private_message'){
                 if(messages[i].to === usuário.name || messages[i].from === usuário.name){
                     chat.innerHTML +=
-                    `<div class = "mensagem private_message">
+                    `<div  data-test="message" class = "mensagem private_message">
                        <div class = "time">(${messages[i].time})&nbsp</div>
                        <b> ${messages[i].from}&nbsp;</b>
                        <div>reservadamente para&nbsp<b>${messages[i].to}</b>:&nbsp</div>
@@ -161,7 +161,7 @@ function renderizarParticipantes(){
 
         if(participantes[i].name !== usuário.name){
             lista.innerHTML +=
-            `<div id="${participantes[i].name}" class="participante" onclick="selParticipante(this)">
+            `<div data-test="participant" id="${participantes[i].name}" class="participante" onclick="selParticipante(this)">
             <ion-icon name="person-circle"></ion-icon>
             <p>${participantes[i].name}</p>
             </div>`;
@@ -183,7 +183,7 @@ function criarIcone(id){
     const elDiv = document.createElement('div');
     elDiv.className = 'icon';
     elDiv.id = id;
-    elDiv.innerHTML = '<ion-icon name="checkmark"></ion-icon>';
+    elDiv.innerHTML = '<ion-icon data-test ="check" name="checkmark"></ion-icon>';
     return elDiv;
 }
 

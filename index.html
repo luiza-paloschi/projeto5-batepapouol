@@ -13,27 +13,27 @@
     <div class="tela_login">
         <img alt="logouol_login" src="./images/logo 1.png" />
         <div class ='entrar'>
-            <input data-identifier="enter-name" class="user" type = "text" placeholder="Digite seu nome"/>
-            <button data-identifier="start" class="botao_entrar" onClick="fazerLogin()">Entrar</button>
+            <input data-test="input-name" data-identifier="enter-name" class="user" type = "text" placeholder="Digite seu nome"/>
+            <button data-test="send-name" data-identifier="start" class="botao_entrar" onClick="fazerLogin()">Entrar</button>
         </div>
     </div>
         <div class="side_menu_background" onclick="hideMenu()"></div>
         <div class="side_menu">
             <div class="titulo">Escolha um contato para enviar mensagem:</div>
             <div class ='listaParticipantes'>
-                <div id ="todos" class="todos participante" onclick="selParticipante(this)">
-                    <ion-icon name="people"></ion-icon>
+                <div data-test="all" id ="todos" class="todos participante" onclick="selParticipante(this)">
+                    <ion-icon data-test="open-participants" name="people"></ion-icon>
                     <p>Todos</p>
                 </div>
                 <div class="online_users"></div>
             </div>
             <div class="titulo titulo2">Escolha a visibilidade:</div>
             <div class ='options_visibility'>
-                <div  data-identifier="visibility" id ="public" class="participante" onclick="selVisibilidade(this)">
+                <div data-test="public" data-identifier="visibility" id ="public" class="participante" onclick="selVisibilidade(this)">
                     <ion-icon name="lock-open"></ion-icon>
                     <p>Público</p>
                 </div>
-                <div  data-identifier="visibility" id ="private_message" class="participante" onclick="selVisibilidade(this)">
+                <div data-test="private" data-identifier="visibility" id ="private_message" class="participante" onclick="selVisibilidade(this)">
                     <ion-icon name="lock-open"></ion-icon>
                     <p>Reservadamente</p>
                 </div>
@@ -48,11 +48,11 @@
         </main>
         <div class = "send-message content hidden">
             <div class = "input_message">
-                <input class="message-box" type="text" placeholder="Escreva aqui..."/>
-                <div id="legenda"></div>
+                <input  data-test="input-message" class="message-box" type="text" placeholder="Escreva aqui..."/>
+                <div data-test="recipient" id="legenda"></div>
             </div> 
             
-            <ion-icon id ="send" name="paper-plane-outline" onclick = "enviarMensagem()"></ion-icon>
+            <ion-icon data-test="send-message" id ="send" name="paper-plane-outline" onclick = "enviarMensagem()"></ion-icon>
         </div>    
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
